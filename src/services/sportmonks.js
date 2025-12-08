@@ -1,5 +1,5 @@
 // src/services/sportmonks.js
-const axios = require("axios");
+const axios = require("../../node_modules/axios/index.d.cts");
 const NodeCache = require("node-cache");
 const { SPORTMONKS_API_TOKEN } = require("../config");
 

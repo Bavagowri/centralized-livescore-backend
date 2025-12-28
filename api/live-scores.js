@@ -1,11 +1,13 @@
-import { getLiveScores } from "./_utils/sportmonks.js";
+import { fetchLiveScores } from "./_utils/sportmonks.js";
 
 export default async function handler(req, res) {
   try {
-    const data = await getLiveScores();
-    res.status(200).json(data);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
+    const data = await fetchLiveScores();
+
+    // small cache – live data
+    res.setHeader("Cache-Control", "s-maxage=15, stale-while-revalidate");
+    res.json({ data });
+  } catch (e) {
+    res.status(500).json({ error: "Live scores failed" });
   }
 }

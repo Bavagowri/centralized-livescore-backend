@@ -1,4 +1,4 @@
-import { getFixturesBetween } from "../_utils/sportmonks.js";
+import { fetchFixtures } from "./_utils/sportmonks.js";
 
 export default async function handler(req, res) {
   try {
@@ -7,11 +7,11 @@ export default async function handler(req, res) {
       .toISOString()
       .split("T")[0];
 
-    const data = await getFixturesBetween(past, today);
+    const data = await fetchFixtures(past, today);
 
-    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate");
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch recent matches" });
+    res.setHeader("Cache-Control", "s-maxage=300");
+    res.json({ data });
+  } catch {
+    res.status(500).json({ error: "Recent failed" });
   }
 }

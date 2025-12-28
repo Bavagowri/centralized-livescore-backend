@@ -1,20 +1,28 @@
 import axios from "axios";
 
 const API_TOKEN = process.env.SPORTMONKS_API_TOKEN;
-
-if (!API_TOKEN) {
-  throw new Error("SPORTMONKS_API_TOKEN is missing");
-}
+const BASE_URL = "https://cricket.sportmonks.com/api/v2.0";
+const INCLUDES = "league,localteam,visitorteam,runs,tosswon,venue";
 
 const api = axios.create({
-  baseURL: "https://cricket.sportmonks.com/api/v2.0",
+  baseURL: BASE_URL,
   params: {
     api_token: API_TOKEN,
-    include: "league,localteam,visitorteam,runs,venue"
-  }
+    include: INCLUDES
+  },
+  timeout: 10000
 });
 
-export async function getLiveScores() {
+export async function fetchLiveScores() {
   const res = await api.get("/livescores");
-  return res.data;
+  return res.data.data ?? [];
+}
+
+export async function fetchFixtures(start, end) {
+  const res = await api.get("/fixtures", {
+    params: {
+      "filter[starts_between]": `${start},${end}`
+    }
+  });
+  return res.data.data ?? [];
 }

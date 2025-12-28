@@ -1,4 +1,4 @@
-import { getFixturesBetween } from "./_utils/sportmonks.js";
+import { getFixturesBetween } from "../_utils/sportmonks.js";
 
 export default async function handler(req, res) {
   try {

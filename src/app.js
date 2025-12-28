@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api/live", liveRoutes);
 app.use("/api/recent", recentRoutes);
 app.use("/api/upcoming", upcomingRoutes);
-app.use("/api", syncRoutes);
+app.use("/api/sync", syncRoutes);
 app.use("/api/teams", teamsRoutes);
 app.use("/api/players", playersRoutes);
 app.use("/api/rankings", rankingsRoutes);

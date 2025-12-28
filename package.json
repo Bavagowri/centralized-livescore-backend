@@ -1,6 +1,7 @@
 {
   "name": "cricket-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "Central backend for cricket data using SportMonks",
   "main": "src/index.js",
   "scripts": {
